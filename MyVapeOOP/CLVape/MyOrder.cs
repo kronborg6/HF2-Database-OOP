@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleVapeOOP
+namespace CLVape
 {
-    public class MyOrder
+    class MyOrder
     {
         public int orderID { get; private set; }
         public int kundeID { get; private set; }

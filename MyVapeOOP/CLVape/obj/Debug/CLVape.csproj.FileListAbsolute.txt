@@ -1,0 +1,6 @@
+C:\Users\mkron\OneDrive\Dokumenter\Rpoes\GitHub\HF2-Database-OOP\MyVapeOOP\CLVape\bin\Debug\CLVape.dll
+C:\Users\mkron\OneDrive\Dokumenter\Rpoes\GitHub\HF2-Database-OOP\MyVapeOOP\CLVape\bin\Debug\CLVape.pdb
+C:\Users\mkron\OneDrive\Dokumenter\Rpoes\GitHub\HF2-Database-OOP\MyVapeOOP\CLVape\obj\Debug\CLVape.csprojAssemblyReference.cache
+C:\Users\mkron\OneDrive\Dokumenter\Rpoes\GitHub\HF2-Database-OOP\MyVapeOOP\CLVape\obj\Debug\CLVape.csproj.CoreCompileInputs.cache
+C:\Users\mkron\OneDrive\Dokumenter\Rpoes\GitHub\HF2-Database-OOP\MyVapeOOP\CLVape\obj\Debug\CLVape.dll
+C:\Users\mkron\OneDrive\Dokumenter\Rpoes\GitHub\HF2-Database-OOP\MyVapeOOP\CLVape\obj\Debug\CLVape.pdb

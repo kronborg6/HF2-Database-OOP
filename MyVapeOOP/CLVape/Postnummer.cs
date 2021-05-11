@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleVapeOOP
+namespace CLVape
 {
-    public class Postnummer
+    class Postnummer
     {
         public int postnummer { get; private set; }
         public string byNavn { get; set; }
