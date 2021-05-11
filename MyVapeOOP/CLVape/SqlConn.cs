@@ -33,7 +33,7 @@ namespace CLVape
                 {
                     con.ConnectionString = GetConnectionStrings();
                     con.Open();
-                    Console.WriteLine("Databasen connect virker");
+                    //Console.WriteLine("Databasen connect virker");
                 }
             }
             catch (Exception ex)
@@ -42,7 +42,6 @@ namespace CLVape
             }
         }
 
-
         public static void closeConnection()
         {
             try
@@ -50,11 +49,13 @@ namespace CLVape
                 if (con.State == ConnectionState.Open)
                 {
                     con.Close();
+                    con.Dispose();
+                    //Console.WriteLine("Databasen er blivet lukket!");
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                //
+                Console.WriteLine(ex);
             }
         }
     }
