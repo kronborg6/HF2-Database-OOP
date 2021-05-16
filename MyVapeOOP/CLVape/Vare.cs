@@ -43,7 +43,7 @@ namespace CLVape
                             vareID = Convert.ToInt32(sdr["VareID"]),
                             navn = sdr["Navn"].ToString(),
                             prise = Convert.ToDouble(sdr["Prise"]),
-                            //antal = Convert.ToInt32(sdr["Antal"]), når jeg laver nye tables i min database
+                            antal = Convert.ToInt32(sdr["Antal"]),
                             firmaID = Convert.ToInt32(sdr["FirmaID"])
                         });
                         //Console.WriteLine("New Customer Add From DB");

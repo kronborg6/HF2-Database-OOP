@@ -23,8 +23,13 @@ namespace ConsoleVapeOOP
 
             vares = Vares.getVare();
 
-            kunders = kunderS.getCustomer();
+            kunders = kunderS.getKunder();
 
+            DateTime localDate = DateTime.Now;
+
+            kunders.Add(new Kunder() { fornavn = "Tina", efternavn = "Kronborg", email = "t.kronborg6@gmail.com", mobil = 27811707, aktiv = 1, opretDate = localDate });
+
+            /*
             foreach (Vare vare in vares)
             {
                 Console.WriteLine(vare.ToString());
@@ -34,8 +39,15 @@ namespace ConsoleVapeOOP
 
             foreach (Kunder kunder in kunders)
             {
+                Console.WriteLine(kunder.ToString()); 
+            }
+            */
+            foreach (Kunder kunder in kunders)
+            {
+                kunderS.Save(kunder);
                 Console.WriteLine(kunder.ToString());
             }
+            //kunderS.Save(kunderS);
 
             Console.ReadKey();
         }

@@ -4,14 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
 namespace CLVape
 {
-    public class Kunder
+    public class Kunder : EntityBase
     {
         public int kundeID { get; private set; }
         public string fornavn { get; set; }
@@ -24,7 +22,7 @@ namespace CLVape
         {
 
         }
-        public List<Kunder> getCustomer() // here vil vi tag alle customer fra databasen og load dem ind i det her program
+        public List<Kunder> getKunder() // here vil vi tag alle customer fra databasen og load dem ind i det her program
         {
             SqlConn.openConnection();
             SqlConn.sql = "SELECT * FROM Kunder";
@@ -62,6 +60,42 @@ namespace CLVape
                 throw;
             }
             return kunders;
+        }
+
+        public override bool Validate()
+        {
+            var isValid = true;
+
+            if (string.IsNullOrWhiteSpace(fornavn)) isValid = false;
+            if (string.IsNullOrWhiteSpace(efternavn)) isValid = false;
+
+            return isValid;
+        }
+        public bool Save(Kunder kunder)
+        {
+            var success = true;
+
+            if (kunder.HasChanges)
+            {
+                if (kunder.IsValid)
+                {
+                    if (kunder.IsNew)
+                    {
+                        Console.WriteLine("Test1");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Test2");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Test3");
+                    success = false;
+                }
+            }
+            Console.WriteLine("Test4");
+            return success;
         }
         public override string ToString()
         {

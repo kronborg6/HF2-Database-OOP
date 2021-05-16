@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Addresse.cs" />
+    <Compile Include="EntityBase.cs" />
     <Compile Include="Firma.cs" />
     <Compile Include="Kunder.cs" />
     <Compile Include="MyOrder.cs" />
