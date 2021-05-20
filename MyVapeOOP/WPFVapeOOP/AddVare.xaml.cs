@@ -50,12 +50,16 @@ namespace WPFVapeOOP
                 Vare Vares = new Vare();
 
                 Vare.InestVare(VareNavn, price, antal, firmaID);
-                MessageBox.Show("Vare er blevet add til databasen", "add Vare", MessageBoxButton.OK);
+                MessageBox.Show("Vare er blevet ændre til databasen", "add Vare", MessageBoxButton.OK);
 
                 INavn.Text = "";
                 IAntal.Text = "";
                 IPrise.Text = "";
                 IFirmaID.Text = "";
+
+                MainWindow mainWindow = new MainWindow();
+                this.Hide();
+                mainWindow.Show();
             }
             catch (Exception ex)
             {

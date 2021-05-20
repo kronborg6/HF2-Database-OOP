@@ -20,7 +20,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="20" />
         </Grid.RowDefinitions>
-        <Button Grid.Column="2" Grid.Row="1">Tilbage</Button>
+        <Button x:Name="Tilbage" Command="{Binding Path=Tilbage.Button_Tilbage}" Grid.Column="2" Grid.Row="1">Tilbage</Button>
         <DataGrid x:Name="ViewVare" Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="2" SelectionChanged="ViewVare_SelectionChanged" ></DataGrid>
     </Grid>
 </Window>

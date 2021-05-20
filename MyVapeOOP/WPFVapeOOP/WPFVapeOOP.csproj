@@ -64,6 +64,7 @@
     <Compile Include="SeVare.xaml.cs">
       <DependentUpon>SeVare.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Tilbage.cs" />
     <Page Include="AddVare.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

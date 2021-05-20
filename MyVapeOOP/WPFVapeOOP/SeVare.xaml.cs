@@ -18,6 +18,12 @@ namespace WPFVapeOOP
     /// <summary>
     /// Interaction logic for SeVare.xaml
     /// </summary>
+    /// 
+
+
+    //Måske Add en måde at søge på??
+
+
     public partial class SeVare : Window
     {
         public SeVare()
@@ -36,6 +42,13 @@ namespace WPFVapeOOP
         private void ViewVare_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void Tilbage_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            this.Hide();
+            mainWindow.Show();
         }
     }
 }
