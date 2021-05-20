@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleVapeOOP", "ConsoleVa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLVape", "CLVape\CLVape.csproj", "{45F2BAD8-4C3A-4737-9276-CC3C88647058}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFUI", "..\..\..\demos\WPFUI\WPFUI\WPFUI.csproj", "{90855878-8D90-47FD-9CCE-4CCF706CA279}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFVapeOOP", "WPFVapeOOP\WPFVapeOOP.csproj", "{07BEB93F-C9CD-4412-9AEB-69DC33B26B31}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{45F2BAD8-4C3A-4737-9276-CC3C88647058}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45F2BAD8-4C3A-4737-9276-CC3C88647058}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45F2BAD8-4C3A-4737-9276-CC3C88647058}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90855878-8D90-47FD-9CCE-4CCF706CA279}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90855878-8D90-47FD-9CCE-4CCF706CA279}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90855878-8D90-47FD-9CCE-4CCF706CA279}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90855878-8D90-47FD-9CCE-4CCF706CA279}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07BEB93F-C9CD-4412-9AEB-69DC33B26B31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07BEB93F-C9CD-4412-9AEB-69DC33B26B31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07BEB93F-C9CD-4412-9AEB-69DC33B26B31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07BEB93F-C9CD-4412-9AEB-69DC33B26B31}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -31,6 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -43,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Addresse.cs" />
+    <Compile Include="ComboBoxChange.cs" />
     <Compile Include="EntityBase.cs" />
     <Compile Include="Firma.cs" />
     <Compile Include="Kunder.cs" />

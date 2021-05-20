@@ -1,0 +1,13 @@
+C:\Users\mkron\OneDrive\Dokumenter\Rpoes\demos\WPFUI\WPFUI\obj\Debug\GUIVapeMVVM.csprojAssemblyReference.cache
+C:\Users\mkron\OneDrive\Dokumenter\Rpoes\demos\WPFUI\WPFUI\obj\Debug\Views\FirstChildView.g.cs
+C:\Users\mkron\OneDrive\Dokumenter\Rpoes\demos\WPFUI\WPFUI\obj\Debug\Views\SecondChildView.g.cs
+C:\Users\mkron\OneDrive\Dokumenter\Rpoes\demos\WPFUI\WPFUI\obj\Debug\Views\ShellView.g.cs
+C:\Users\mkron\OneDrive\Dokumenter\Rpoes\demos\WPFUI\WPFUI\obj\Debug\App.g.cs
+C:\Users\mkron\OneDrive\Dokumenter\Rpoes\demos\WPFUI\WPFUI\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\mkron\OneDrive\Dokumenter\Rpoes\demos\WPFUI\WPFUI\obj\Debug\WPFUI_MarkupCompile.cache
+C:\Users\mkron\OneDrive\Dokumenter\Rpoes\demos\WPFUI\WPFUI\obj\Debug\WPFUI_MarkupCompile.lref
+C:\Users\mkron\OneDrive\Dokumenter\Rpoes\demos\WPFUI\WPFUI\obj\Debug\Views\FirstChildView.baml
+C:\Users\mkron\OneDrive\Dokumenter\Rpoes\demos\WPFUI\WPFUI\obj\Debug\Views\SecondChildView.baml
+C:\Users\mkron\OneDrive\Dokumenter\Rpoes\demos\WPFUI\WPFUI\obj\Debug\Views\ShellView.baml
+C:\Users\mkron\OneDrive\Dokumenter\Rpoes\demos\WPFUI\WPFUI\obj\Debug\WPFUI.exe
+C:\Users\mkron\OneDrive\Dokumenter\Rpoes\demos\WPFUI\WPFUI\obj\Debug\WPFUI.pdb
