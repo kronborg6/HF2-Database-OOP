@@ -50,5 +50,21 @@ namespace WPFVapeOOP
             this.Hide();
             mainWindow.Show();
         }
+
+        private void LookUp_button_Click(object sender, RoutedEventArgs e)
+        {
+            Vare Vares = new Vare();
+
+            string StVareAntal = LookUpBox.Text;
+            int VareID = int.Parse(StVareAntal);
+
+            ViewVare.ItemsSource = Vares.GuiGetVareFromID(VareID);
+        }
+
+        private void Clear_button_Click(object sender, RoutedEventArgs e)
+        {
+            Vare Vares = new Vare();
+            ViewVare.ItemsSource = Vares.GuiGetVare();
+        }
     }
 }

@@ -73,17 +73,17 @@ namespace WPFVapeOOP
                 }
                 if (String.IsNullOrEmpty(StVareAntal))
                 {
-                    MessageBox.Show("Du glemt at inpute et Antaæ" + Environment.NewLine, "C# tilføje vare", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Du glemt at inpute et Antaæ" + Environment.NewLine, "C# ændre vare", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 if (String.IsNullOrEmpty(StVarePrise))
                 {
-                    MessageBox.Show("Du glemt at inpute en Prise " + Environment.NewLine, "C# tilføje vare", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Du glemt at inpute en Prise " + Environment.NewLine, "C# ændre vare", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 else
                 {
                     Vare.ChangeVareGui(VareNavn, VarePrise, VareAntal, VareID);
 
-                    MessageBox.Show("Vare er blevet add til databasen", "add Vare", MessageBoxButton.OK);
+                    MessageBox.Show("Vare er blevet ændre til databasen", "add Vare", MessageBoxButton.OK);
 
 
                     IVareNavn.Text = "";
@@ -102,6 +102,53 @@ namespace WPFVapeOOP
                 throw;
             }
 
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Vare Vares = new Vare();
+                ComboBoxChange icb = (ComboBoxChange)PickVare.SelectedItem;
+                int VareID = icb.number;
+
+
+                string StVareAntal = ICVareAntal.Text;
+                int VareAntal = int.Parse(StVareAntal);
+
+                string StVarePrise = ICVarePrise.Text;
+                float VarePrise = float.Parse(StVarePrise);
+
+
+                if (String.IsNullOrEmpty(StVareAntal))
+                {
+                    MessageBox.Show("Du glemt at inpute et Antal" + Environment.NewLine, "C# Ændre vare", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                if (String.IsNullOrEmpty(StVarePrise))
+                {
+                    MessageBox.Show("Du glemt at inpute en Prise " + Environment.NewLine, "C# Ændre vare", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else
+                {
+                    Vare.ChangeVarePriseAntalGui(VarePrise, VareAntal, VareID);
+
+                    MessageBox.Show("Vare er blevet Ændre til databasen", "add Vare", MessageBoxButton.OK);
+
+
+                    ICVareAntal.Text = "";
+                    ICVarePrise.Text = "";
+
+                    MainWindow mainWindow = new MainWindow();
+                    this.Hide();
+                    mainWindow.Show();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Der var en fejl med at ændre Vare til Databasen " + Environment.NewLine + "Descriptions; " + ex.Message.ToString(), "C# ændre vare", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                throw;
+            }
         }
     }
 }

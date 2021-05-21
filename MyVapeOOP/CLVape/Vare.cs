@@ -106,7 +106,30 @@ namespace CLVape
 
             SqlConn.closeConnection();
         }
+        public static void ChangeVarePriseAntalGui(float VarePrise, int VareAntal, int VareID)
+        {
+            try
+            {
+                SqlConn.openConnection();
 
+                SqlConn.sql = "UPDATE Vare SET Prise = @Prise, Antal = @Antal WHERE VareID = '" + VareID + "'";
+                SqlConn.cmd.CommandType = CommandType.Text;
+                SqlConn.cmd.CommandText = SqlConn.sql;
+
+                SqlConn.cmd.Parameters.AddWithValue("@Prise", VarePrise);
+                SqlConn.cmd.Parameters.AddWithValue("@Antal", VareAntal);
+                SqlConn.da = new SqlDataAdapter(SqlConn.cmd);
+                SqlConn.dt = new DataTable();
+                SqlConn.da.Fill(SqlConn.dt);
+
+                SqlConn.closeConnection();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public static void ChangeVareGui(string VareNavn, float VarePrise, int VareAntal, int VareID)
         {
             try
