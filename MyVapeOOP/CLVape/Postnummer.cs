@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using CLVape.Repository;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -11,59 +12,68 @@ namespace CLVape
 {
     public class Postnummer
     {
-        public int postnummer 
-        { 
-            get
+        //public int postnummer
+        //{
+        //    get
+        //    {
+        //        return postnummer;
+        //    }
+        //    private set
+        //    {
+        //        if (value <= 999 || value >= 10000)
+        //        {
+        //            return;
+        //        }
+        //        postnummer = value;
+        //    }
+        //}
+        private int _postnummer;
+
+        public int postnummer
+        {
+            get { return _postnummer; }
+
+            set
             {
-                return postnummer;
-            } 
-            private set 
-            {
-                if (value > 999 & value < 10000) 
+                if (value > 999 && value < 10000)
                 {
-                    postnummer = value;
+                    _postnummer = value;
+
                 }
             }
         }
 
+        //public int postnummer { get; set; }
         public string byNavn { get; set; }
-        public Postnummer()
+        public Postnummer() : this(0)
         {
 
         }
+        public Postnummer(int postnummerID)
+        {
+            this.postnummer = postnummerID;
+        }
         public List<Postnummer> getPostnummer() // here vil vi tag alle customer fra databasen og load dem ind i det her program
         {
-            SqlConn.openConnection();
-            SqlConn.sql = "SELECT * FROM Kunder";
-            SqlConn.cmd.CommandType = CommandType.Text;
-            SqlConn.cmd.CommandText = SqlConn.sql;
-            SqlConn.da = new SqlDataAdapter(SqlConn.cmd);
-
-            List<Postnummer> postnummers = new List<Postnummer>();
-
             try
             {
-                using (SqlDataReader sdr = SqlConn.cmd.ExecuteReader())
-                {
-                    while (sdr.Read())
-                    {
-                        postnummers.Add(new Postnummer
-                        {
-                            postnummer = Convert.ToInt32(sdr["Postnummer"]),
-                            byNavn = sdr["Bynavn"].ToString()
-                        });
-                        //Console.WriteLine("New Customer Add From DB");
-                    }
-                }
-                SqlConn.cmd.Parameters.Clear();
-                SqlConn.closeConnection();
+                List<Postnummer> postnummers = new List<Postnummer>();
+
+                PostnummerRepository postnummerRepository = new PostnummerRepository();
+
+                postnummers = postnummerRepository.GetPostnummerDB();
+
+                return postnummers;
             }
             catch (Exception)
             {
 
                 throw;
             }
-            return postnummers;
+        }
+        public override string ToString()
+        {
+            return "Postnummer: " + postnummer + " Bynavn: " + byNavn;
         }
     }
 }

@@ -7,51 +7,38 @@ using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
 using System.Globalization;
+using CLVape.Repository;
+
 
 namespace CLVape
 {
     public class Addresse : EntityBase
     {
         public int addresseID { get; private set; }
-        public int postnummer { get; private set; }
+        public int postnummer { get; set; }
         public string vej { get; set; }
-        public int kundeID { get; private set; }
-        public Addresse()
+        public int kundeID { get; set; }
+        //public List<Kunder> kundeID { get; set; }
+        public Addresse() : this(0)
         {
 
         }
+        public Addresse(int AddressID)
+        {
+            this.addresseID = AddressID;
+        }
         public List<Addresse> getAddresse() // here vil vi tag alle customer fra databasen og load dem ind i det her program
         {
-            SqlConn.openConnection();
-            SqlConn.sql = "SELECT * FROM Vare";
-            SqlConn.cmd.CommandType = CommandType.Text;
-            SqlConn.cmd.CommandText = SqlConn.sql;
-            SqlConn.da = new SqlDataAdapter(SqlConn.cmd);
-
             List<Addresse> addresses = new List<Addresse>();
-
+            AddresseRepository addresseRepository = new AddresseRepository();
             try
             {
-                using (SqlDataReader sdr = SqlConn.cmd.ExecuteReader())
-                {
-                    while (sdr.Read())
-                    {
-                        addresses.Add(new Addresse
-                        {
-                            addresseID = Convert.ToInt32(sdr["VareID"]),
-                            postnummer = Convert.ToInt32(sdr["Prise"]),
-                            vej = sdr["Navn"].ToString(),
-                            kundeID = Convert.ToInt32(sdr["FirmaID"])
-                        });
-                        //Console.WriteLine("New Customer Add From DB");
-                    }
-                }
-                SqlConn.cmd.Parameters.Clear();
-                SqlConn.closeConnection();
+                addresses = addresseRepository.GetAddresseDB();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Console.WriteLine(ex);
+
+                throw;
             }
             return addresses;
         }

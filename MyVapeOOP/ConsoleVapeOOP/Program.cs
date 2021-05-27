@@ -21,13 +21,24 @@ namespace ConsoleVapeOOP
             List<Vare> vares = new List<Vare>();
             Vare Vares = new Vare();
 
+            List<Postnummer> postnummers = new List<Postnummer>();
+            Postnummer postnummer = new Postnummer();
+
+            postnummers = postnummer.getPostnummer();
+
             vares = Vares.getVare();
 
             kunders = kunderS.getKunder();
 
             DateTime localDate = DateTime.Now;
 
-            kunders.Add(new Kunder() { fornavn = "Tina", efternavn = "Kronborg", email = "t.kronborg6@gmail.com", mobil = 27811707, aktiv = 1, opretDate = localDate });
+            foreach (Postnummer post in postnummers)
+            {
+                Console.WriteLine(post.ToString());
+            }
+
+            //kunders.Add(new Kunder() { fornavn = "Tina", efternavn = "Kronborg", email = "t.kronborg6@gmail.com", mobil = 27811707, aktiv = 1, opretDate = localDate });
+            //postnummers.Add(new Postnummer(postnummerID: 5051) { byNavn = "Mikkel Kronborg" });
 
             /*
             foreach (Vare vare in vares)
