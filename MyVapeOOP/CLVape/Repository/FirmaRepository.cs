@@ -50,5 +50,66 @@ namespace CLVape.Repository
             return firmas;
 
         }
+        public int AddFirmaTilDB(string navn, string email, int mobil)
+        {
+            try
+            {
+                //StringBuilder result = new StringBuilder();
+
+                SqlConn.openConnection();
+
+                SqlConn.sql = "dbo.AddFirma";
+                SqlConn.cmd.CommandText = SqlConn.sql;
+                SqlConn.cmd.CommandType = CommandType.StoredProcedure;
+
+
+                SqlConn.cmd.Parameters.Add("@Navn", SqlDbType.VarChar).Value = string.IsNullOrEmpty(navn) ? (object)DBNull.Value : navn;
+                SqlConn.cmd.Parameters.Add("@Email", SqlDbType.VarChar).Value = string.IsNullOrEmpty(email) ? (object)DBNull.Value : email;
+                SqlConn.cmd.Parameters.Add("@Teleforn", SqlDbType.Int).Value = Equals(mobil, 0) ? (object)DBNull.Value : mobil;
+
+                SqlConn.cmd.Parameters.Add(new SqlParameter("@Lid", SqlDbType.Int));
+                SqlConn.cmd.Parameters["@Lid"].Direction = ParameterDirection.Output;
+                SqlConn.cmd.ExecuteNonQuery();
+
+                int rtnID = (int)SqlConn.cmd.Parameters["@Lid"].Value;
+
+                SqlConn.cmd.Parameters.Clear();
+                SqlConn.closeConnection();
+
+
+                return rtnID;
+            }
+            catch (Exception er)
+            {
+                Console.WriteLine("VareRep der er sket en fjel: {0}", er);
+                throw;
+            }
+        }
+        public void UpdateFirmaDB(int ID, string navn, string email, int mobil)
+        {
+            try
+            {
+                SqlConn.openConnection();
+
+                SqlConn.sql = "dbo.UpdateFirma";
+                SqlConn.cmd.CommandText = SqlConn.sql;
+                SqlConn.cmd.CommandType = CommandType.StoredProcedure;
+
+
+                SqlConn.cmd.Parameters.Add("@Navn", SqlDbType.VarChar).Value = string.IsNullOrEmpty(navn) ? (object)DBNull.Value : navn;
+                SqlConn.cmd.Parameters.Add("@Email", SqlDbType.VarChar).Value = string.IsNullOrEmpty(email) ? (object)DBNull.Value : email;
+                SqlConn.cmd.Parameters.Add("@Teleforn", SqlDbType.Int).Value = Equals(mobil, 0) ? (object)DBNull.Value : mobil;
+                SqlConn.cmd.Parameters.Add("@FirmaID", SqlDbType.Int).Value = Equals(ID, 0) ? (object)DBNull.Value : ID;
+
+                SqlConn.cmd.Parameters.Clear();
+                SqlConn.closeConnection();
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 using System.Data;
 using System.Data.SqlClient;
+using CLVape.Repository;
 
 namespace CLVape
 {
-    public class VareOrder
+    public class VareOrder : EntityBase
     {
         public int vareOrderID { get; private set; }
         public int orderID { get; private set; }
@@ -18,50 +19,81 @@ namespace CLVape
         public double prise { get; set; }
         public DateTime sendtDate { get; set; }
 
-        public VareOrder()
+        public VareOrder(int VareOrderID, int OrderID, int VareID)
         {
+            if (vareOrderID == 0)
+            {
+                this.vareOrderID = VareOrderID;
+                this.orderID = OrderID;
+                this.vareID = VareID;
 
+                this.IsNew = true;
+                this.HasChanges = true;
+            }
+            else
+            {
+                this.vareOrderID = VareOrderID;
+                this.orderID = OrderID;
+                this.vareID = VareID;
+                this.HasChanges = true;
+            }
         }
-        
+
         public List<VareOrder> getVareOrder() // here vil vi tag alle customer fra databasen og load dem ind i det her program
         {
-            SqlConn.openConnection();
-            SqlConn.sql = "SELECT * FROM Kunder";
-            SqlConn.cmd.CommandType = CommandType.Text;
-            SqlConn.cmd.CommandText = SqlConn.sql;
-            SqlConn.da = new SqlDataAdapter(SqlConn.cmd);
-
             List<VareOrder> vareOrders = new List<VareOrder>();
+            VareOrderRepository vareOrderRepository = new VareOrderRepository();
 
             try
             {
-                using (SqlDataReader sdr = SqlConn.cmd.ExecuteReader())
-                {
-                    while (sdr.Read())
-                    {
-                        vareOrders.Add(new VareOrder
-                        {
-                            vareOrderID = Convert.ToInt32(sdr["KundeID"]),
-                            orderID = Convert.ToInt32(sdr["KundeID"]),
-                            vareID = Convert.ToInt32(sdr["KundeID"]),
-                            antal = Convert.ToInt32(sdr["KundeID"]),
-                            prise = Convert.ToDouble(sdr["Prise"]),
-                            sendtDate = Convert.ToDateTime(sdr["Fornavn"])
-                        });
-                        //Console.WriteLine("New Customer Add From DB");
-                    }
-                }
-                SqlConn.cmd.Parameters.Clear();
-                SqlConn.cmd.Parameters.Clear();
-                SqlConn.closeConnection();
+                vareOrders = vareOrderRepository.GetVareOrdersFraDB();
             }
             catch (Exception)
             {
 
                 throw;
             }
+
             return vareOrders;
         }
-        
+
+        public override bool Validate()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Save(VareOrder vareOrder)
+        {
+            var success = true;
+
+            if (vareOrder.HasChanges)
+            {
+                if (vareOrder.IsValid)
+                {
+                    if (vareOrder.IsNew)
+                    {
+                        VareOrderRepository vareOrderRepository = new VareOrderRepository();
+
+                        vareOrder.vareOrderID = vareOrderRepository.AddVareOrderTilDB(vareOrder.orderID, vareOrder.vareID, vareOrder.antal, vareOrder.prise);
+
+                        vareOrder.IsNew = false;
+                        vareOrder.HasChanges = false;
+                    }
+                    else
+                    {
+                        VareOrderRepository vareOrderRepository = new VareOrderRepository();
+
+                        vareOrderRepository.UpdateVareOrderDB(vareOrder.vareOrderID, vareOrder.orderID, vareOrder.vareID, vareOrder.antal, vareOrder.prise);
+
+                        vareOrder.HasChanges = false;
+                    }
+                }
+                else
+                {
+                    success = false;
+                }
+            }
+            return success;
+        }
     }
 }

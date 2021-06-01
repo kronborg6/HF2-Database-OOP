@@ -20,12 +20,35 @@ namespace CLVape
         public int antal { get; set; }
         public int firmaID { get; set; }
 
+        //public int NextID;
+
         public Vare() : this(0)
         {
         }
         public Vare(int varID)
         {
-            this.vareID = varID;
+            if (varID == 0)
+            {
+                this.vareID = varID;
+
+                this.IsNew = true;
+                this.HasChanges = true;
+            }
+            else
+            {
+                this.vareID = varID;
+
+            }
+        }
+
+
+        public int NextVareID()
+        {
+
+            int NextID = VareRepository.GetNextVareID();
+
+            //Console.WriteLine(NextID);
+            return NextID;
         }
 
 
@@ -43,7 +66,6 @@ namespace CLVape
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -195,9 +217,68 @@ namespace CLVape
             return "ID: " + vareID + " Navn: " + navn + " Prise: " + prise + " Antal: " + antal + "\n";
         }
 
+        public void testAddVare()
+        {
+            VareRepository vareRepository = new VareRepository();
+
+            try
+            {
+                string navn = "AA";
+                float price = 2021;
+                int antal = 15;
+                int firmaID = 1;
+
+                vareRepository.AddVareTilDB(navn, price, antal, firmaID);
+                Console.WriteLine("Vare er blevet kørt");
+            }
+            catch (Exception er)
+            {
+                Console.WriteLine("Vare der er sket en fejl: {0}", er);
+                throw;
+            }
+        }
         public override bool Validate()
         {
-            throw new NotImplementedException();
+            var isValid = true;
+
+            if (string.IsNullOrWhiteSpace(navn)) isValid = false;
+            if (prise <= 0) isValid = false;
+            if (firmaID == 0) isValid = false;
+
+            return isValid;
+        }
+        public bool Save(Vare vare)
+        {
+            var success = true;
+
+            if (vare.HasChanges)
+            {
+                if (vare.IsValid)
+                {
+                    if (vare.IsNew)
+                    {
+                        VareRepository vareRepository = new VareRepository();
+                        
+                        vare.vareID = vareRepository.AddVareTilDB(vare.navn, vare.prise, vare.antal, vare.firmaID);
+
+                        vare.IsNew = false;
+                        vare.HasChanges = false;
+                    }
+                    else
+                    {
+                        VareRepository vareRepository = new VareRepository();
+
+                        vareRepository.UpdateVareDB(vare.vareID, vare.navn, vare.prise, vare.antal, vare.firmaID);
+
+                        vare.HasChanges = false;
+                    }
+                }
+                else
+                {
+                    success = false;
+                }
+            }
+            return success;
         }
     }
 }

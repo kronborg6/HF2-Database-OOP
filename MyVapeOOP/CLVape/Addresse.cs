@@ -25,7 +25,17 @@ namespace CLVape
         }
         public Addresse(int AddressID)
         {
-            this.addresseID = AddressID;
+            if (AddressID == 0)
+            {
+                this.addresseID = AddressID;
+                this.HasChanges = true;
+                this.IsNew = true;
+            }
+            else
+            {
+                this.addresseID = AddressID;
+                this.HasChanges = true;
+            }
         }
         public List<Addresse> getAddresse() // here vil vi tag alle customer fra databasen og load dem ind i det her program
         {
@@ -50,6 +60,40 @@ namespace CLVape
             if (string.IsNullOrWhiteSpace(vej)) isValid = false;
 
             return isValid;
+        }
+        public bool Save(Addresse addresse)
+        {
+            var success = true;
+
+            if (addresse.HasChanges)
+            {
+                if (addresse.IsValid)
+                {
+                    if (addresse.IsNew)
+                    {
+                        AddresseRepository addresseRepository = new AddresseRepository();
+
+                        addresse.addresseID = addresseRepository.AddAddresseDB(addresse.vej, addresse.postnummer, addresse.kundeID);
+
+                        addresse.IsNew = false;
+                        addresse.HasChanges = false;
+                    }
+                    else
+                    {
+                        AddresseRepository addresseRepository = new AddresseRepository();
+
+
+                        addresseRepository.UpdateAddresseDB(addresse.addresseID, addresse.vej, addresse.postnummer, addresse.kundeID);
+
+                        addresse.HasChanges = false;
+                    }
+                }
+                else
+                {
+                    success = false;
+                }
+            }
+            return success;
         }
     }
 }

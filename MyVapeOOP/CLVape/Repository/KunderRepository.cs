@@ -50,6 +50,70 @@ namespace CLVape.Repository
             }
             return kunders;
         }
+        public int AddKunderTilDB(string fornavn, string efternavn, string email, int mobil)
+        {
+            try
+            {
+                //StringBuilder result = new StringBuilder();
+
+                SqlConn.openConnection();
+
+                SqlConn.sql = "dbo.AddKunder";
+                SqlConn.cmd.CommandText = SqlConn.sql;
+                SqlConn.cmd.CommandType = CommandType.StoredProcedure;
+
+
+                SqlConn.cmd.Parameters.Add("@Fornavn", SqlDbType.VarChar).Value = string.IsNullOrEmpty(fornavn) ? (object)DBNull.Value : fornavn;
+                SqlConn.cmd.Parameters.Add("@Efternavn", SqlDbType.VarChar).Value = string.IsNullOrEmpty(efternavn) ? (object)DBNull.Value : efternavn;
+                SqlConn.cmd.Parameters.Add("@Email", SqlDbType.VarChar).Value = string.IsNullOrEmpty(email) ? (object)DBNull.Value : email;
+                SqlConn.cmd.Parameters.Add("@Mobil", SqlDbType.Int).Value = Equals(mobil, 0) ? (object)DBNull.Value : mobil;
+
+                SqlConn.cmd.Parameters.Add(new SqlParameter("@Lid", SqlDbType.Int));
+                SqlConn.cmd.Parameters["@Lid"].Direction = ParameterDirection.Output;
+                SqlConn.cmd.ExecuteNonQuery();
+
+                int rtnID = (int)SqlConn.cmd.Parameters["@Lid"].Value;
+
+                //Console.WriteLine(rtnID);
+
+                SqlConn.cmd.Parameters.Clear();
+                SqlConn.closeConnection();
+
+
+                return rtnID;
+            }
+            catch (Exception er)
+            {
+                Console.WriteLine("VareRep der er sket en fjel: {0}", er);
+                throw;
+            }
+        }
+        public void UpdateKunderDB(int ID, string fornavn, string efternavn, string email, int mobil)
+        {
+            try
+            {
+                SqlConn.openConnection();
+
+                SqlConn.sql = "dbo.UpdateKunder";
+                SqlConn.cmd.CommandText = SqlConn.sql;
+                SqlConn.cmd.CommandType = CommandType.StoredProcedure;
+
+
+                SqlConn.cmd.Parameters.Add("@Fornavn", SqlDbType.VarChar).Value = string.IsNullOrEmpty(fornavn) ? (object)DBNull.Value : fornavn;
+                SqlConn.cmd.Parameters.Add("@Efternavn", SqlDbType.VarChar).Value = string.IsNullOrEmpty(efternavn) ? (object)DBNull.Value : efternavn;
+                SqlConn.cmd.Parameters.Add("@Email", SqlDbType.VarChar).Value = string.IsNullOrEmpty(email) ? (object)DBNull.Value : email;
+                SqlConn.cmd.Parameters.Add("@Mobil", SqlDbType.Int).Value = Equals(mobil, 0) ? (object)DBNull.Value : mobil;
+                SqlConn.cmd.Parameters.Add("@KunderID", SqlDbType.Int).Value = Equals(ID, 0) ? (object)DBNull.Value : ID;
+
+                SqlConn.cmd.Parameters.Clear();
+                SqlConn.closeConnection();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
     
 }

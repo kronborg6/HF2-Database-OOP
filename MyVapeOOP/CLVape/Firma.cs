@@ -10,7 +10,7 @@ using System.Data.SqlClient;
 
 namespace CLVape
 {
-    public class Firma
+    public class Firma : EntityBase
     {
         public int firmaID { get; private set; }
         public string navn { get; set; }
@@ -21,7 +21,18 @@ namespace CLVape
         }
         public Firma(int FirmaID)
         {
-            this.firmaID = FirmaID;
+            if (FirmaID == 0)
+            {
+                this.firmaID = FirmaID;
+
+                this.IsNew = true;
+                this.HasChanges = true;
+            }
+            else
+            {
+                this.firmaID = FirmaID;
+
+            }
         }
         
         public List<Firma> getFirma() // here vil vi tag alle customer fra databasen og load dem ind i det her program
@@ -40,6 +51,50 @@ namespace CLVape
             }
             return firmas;
         }
-        
+
+        public override bool Validate()
+        {
+            var isValid = true;
+
+            if (string.IsNullOrWhiteSpace(navn)) isValid = false;
+            if (string.IsNullOrWhiteSpace(email)) isValid = false;
+
+
+            return isValid;
+        }
+        public bool Save(Firma firma)
+        {
+            var success = true;
+
+            if (firma.HasChanges)
+            {
+                if (firma.IsValid)
+                {
+                    if (firma.IsNew)
+                    {
+                        FirmaRepository firmaRepository = new FirmaRepository();
+
+                        firma.firmaID = firmaRepository.AddFirmaTilDB(firma.navn, firma.email, firma.mobil);
+
+                        firma.IsNew = false;
+                        firma.HasChanges = false;
+                    }
+                    else
+                    {
+                        FirmaRepository firmaRepository = new FirmaRepository();
+
+                        firmaRepository.UpdateFirmaDB(firma.firmaID, firma.navn, firma.email, firma.mobil);
+
+                        firma.HasChanges = false;
+                    }
+                }
+                else
+                {
+                    success = false;
+                }
+            }
+            Console.WriteLine("Test4");
+            return success;
+        }
     }
 }

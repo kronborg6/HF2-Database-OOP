@@ -14,7 +14,7 @@ namespace CLVape.Repository
         public List<MyOrder> GetMyOrdersFraDB()
         {
             SqlConn.openConnection();
-            SqlConn.sql = "SELECT * FROM Kunder";
+            SqlConn.sql = "SELECT * FROM MyOrder";
             SqlConn.cmd.CommandType = CommandType.Text;
             SqlConn.cmd.CommandText = SqlConn.sql;
             SqlConn.da = new SqlDataAdapter(SqlConn.cmd);

@@ -46,5 +46,64 @@ namespace CLVape.Repository
             }
             return addresses;
         }
+        public int AddAddresseDB(string vej, int postnummer, int kundeID)
+        {
+            try
+            {
+                SqlConn.openConnection();
+
+                SqlConn.sql = "dbo.AddAddresse";
+                SqlConn.cmd.CommandText = SqlConn.sql;
+                SqlConn.cmd.CommandType = CommandType.StoredProcedure;
+
+
+                SqlConn.cmd.Parameters.Add("@Vej", SqlDbType.VarChar).Value = string.IsNullOrEmpty(vej) ? (object)DBNull.Value : vej;
+                SqlConn.cmd.Parameters.Add("@Postnummer", SqlDbType.Int).Value = Equals(postnummer, 0) ? (object)DBNull.Value : postnummer;
+                SqlConn.cmd.Parameters.Add("@KundeID", SqlDbType.Int).Value = Equals(kundeID, 0) ? (object)DBNull.Value : kundeID;
+
+                SqlConn.cmd.Parameters.Add(new SqlParameter("@Lid", SqlDbType.Int));
+                SqlConn.cmd.Parameters["@Lid"].Direction = ParameterDirection.Output;
+                SqlConn.cmd.ExecuteNonQuery();
+
+                int rtnID = (int)SqlConn.cmd.Parameters["@Lid"].Value;
+
+
+                SqlConn.cmd.Parameters.Clear();
+                SqlConn.closeConnection();
+
+
+                return rtnID;
+            }
+            catch (Exception er)
+            {
+                Console.WriteLine("VareRep der er sket en fjel: {0}", er);
+                throw;
+            }
+        }
+        public void UpdateAddresseDB(int ID, string vej, int postnummer, int kundeID)
+        {
+            try
+            {
+                SqlConn.openConnection();
+
+                SqlConn.sql = "dbo.UpdateAddresse";
+                SqlConn.cmd.CommandText = SqlConn.sql;
+                SqlConn.cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlConn.cmd.Parameters.Add("@Vej", SqlDbType.VarChar).Value = string.IsNullOrEmpty(vej) ? (object)DBNull.Value : vej;
+                SqlConn.cmd.Parameters.Add("@Postnummer", SqlDbType.Int).Value = Equals(postnummer, 0) ? (object)DBNull.Value : postnummer;
+                SqlConn.cmd.Parameters.Add("@KundeID", SqlDbType.Int).Value = Equals(kundeID, 0) ? (object)DBNull.Value : kundeID;
+                SqlConn.cmd.Parameters.Add("@AddresseID", SqlDbType.Int).Value = Equals(ID, 0) ? (object)DBNull.Value : ID;
+
+                SqlConn.cmd.Parameters.Clear();
+                SqlConn.closeConnection();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
     }
 }

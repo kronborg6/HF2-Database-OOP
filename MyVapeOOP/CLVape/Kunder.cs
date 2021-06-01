@@ -18,8 +18,17 @@ namespace CLVape
         }
         public Kunder(int KundID)
         {
-            this.kundeID = KundID;
-            this.IsNew = true;
+            if (KundID == 0)
+            {
+                this.IsNew = true;
+                this.HasChanges = true;
+
+            }
+            else
+            {
+                this.kundeID = KundID;
+                this.HasChanges = true;
+            }
         }
         public List<Kunder> getKunder() // here vil vi tag alle customer fra databasen og load dem ind i det her program
         {
@@ -48,6 +57,7 @@ namespace CLVape
             if (string.IsNullOrWhiteSpace(fornavn)) isValid = false;
             if (string.IsNullOrWhiteSpace(efternavn)) isValid = false;
 
+
             return isValid;
         }
         public bool Save(Kunder kunder)
@@ -60,20 +70,27 @@ namespace CLVape
                 {
                     if (kunder.IsNew)
                     {
-                        Console.WriteLine("Test1");
+                        KunderRepository kunderRepository = new KunderRepository();
+
+                        kunder.kundeID = kunderRepository.AddKunderTilDB(kunder.fornavn, kunder.efternavn, kunder.email, kunder.mobil);
+
+                        kunder.IsNew = false;
+                        kunder.HasChanges = false;
                     }
                     else
                     {
-                        Console.WriteLine("Test2");
+                        KunderRepository kunderRepository = new KunderRepository();
+
+                        kunderRepository.UpdateKunderDB(kunder.kundeID, kunder.fornavn, kunder.efternavn, kunder.email, kunder.mobil);
+
+                        kunder.HasChanges = false;
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Test3");
                     success = false;
                 }
             }
-            Console.WriteLine("Test4");
             return success;
         }
         public override string ToString()

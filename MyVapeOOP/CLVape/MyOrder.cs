@@ -11,7 +11,7 @@ using CLVape.Repository;
 
 namespace CLVape
 {
-    public class MyOrder
+    public class MyOrder : EntityBase
     {
         public int orderID { get; private set; }
         public int kundeID { get; private set; }
@@ -40,6 +40,45 @@ namespace CLVape
 
             return myOrders;
         }
-        
+
+        public override bool Validate()
+        {
+            throw new NotImplementedException();
+        }
+        public bool Save(MyOrder myOrder)
+        {
+            var success = true;
+
+            if (myOrder.HasChanges)
+            {
+                if (myOrder.IsValid)
+                {
+                    if (myOrder.IsNew)
+                    {
+                        //VareRepository vareRepository = new VareRepository();
+
+                        MyOrderRepository myOrderRepository = new MyOrderRepository();
+
+                        //vare.vareID = vareRepository.AddVareTilDB(vare.navn, vare.prise, vare.antal, vare.firmaID);
+
+                        myOrder.IsNew = false;
+                        myOrder.HasChanges = false;
+                    }
+                    else
+                    {
+                        MyOrderRepository myOrderRepository = new MyOrderRepository();
+
+                        //vareRepository.UpdateVareDB(vare.vareID, vare.navn, vare.prise, vare.antal, vare.firmaID);
+
+                        myOrder.HasChanges = false;
+                    }
+                }
+                else
+                {
+                    success = false;
+                }
+            }
+            return success;
+        }
     }
 }
