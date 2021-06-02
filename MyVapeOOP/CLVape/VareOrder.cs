@@ -35,7 +35,7 @@ namespace CLVape
                 this.vareOrderID = VareOrderID;
                 this.orderID = OrderID;
                 this.vareID = VareID;
-                this.HasChanges = true;
+                //this.HasChanges = true;
             }
         }
 
@@ -59,7 +59,13 @@ namespace CLVape
 
         public override bool Validate()
         {
-            throw new NotImplementedException();
+            var isValid = true;
+
+            if (vareID <= 0) isValid = false;
+            //if (orderID <= 0) isValid = false;
+            if (prise <= 0) isValid = false;
+
+            return isValid;
         }
 
         public bool Save(VareOrder vareOrder)
@@ -94,6 +100,10 @@ namespace CLVape
                 }
             }
             return success;
+        }
+        public override string ToString()
+        {
+            return "ID: " + vareOrderID + " OrderID: " + orderID + " VareID: " + vareID + " Antal: " + antal + " Prise: " + prise;
         }
     }
 }

@@ -93,7 +93,6 @@ namespace CLVape
                     success = false;
                 }
             }
-            Console.WriteLine("Test4");
             return success;
         }
     }

@@ -27,7 +27,7 @@ namespace CLVape
             else
             {
                 this.kundeID = KundID;
-                this.HasChanges = true;
+                //this.HasChanges = true;
             }
         }
         public List<Kunder> getKunder() // here vil vi tag alle customer fra databasen og load dem ind i det her program
@@ -82,7 +82,7 @@ namespace CLVape
                         KunderRepository kunderRepository = new KunderRepository();
 
                         kunderRepository.UpdateKunderDB(kunder.kundeID, kunder.fornavn, kunder.efternavn, kunder.email, kunder.mobil);
-
+                        //Console.WriteLine("Test");
                         kunder.HasChanges = false;
                     }
                 }

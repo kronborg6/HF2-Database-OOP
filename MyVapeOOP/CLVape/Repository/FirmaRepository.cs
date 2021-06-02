@@ -28,11 +28,11 @@ namespace CLVape.Repository
                 {
                     while (sdr.Read())
                     {
-                        firmas.Add(new Firma(FirmaID: Convert.ToInt32(sdr["KundeID"]))
+                        firmas.Add(new Firma(FirmaID: Convert.ToInt32(sdr["FirmaID"]))
                         {
                             //firmaID = Convert.ToInt32(sdr["KundeID"]),
-                            navn = sdr["Fornavn"].ToString(),
-                            mobil = Convert.ToInt32(sdr["Mobil"]),
+                            navn = sdr["Navn"].ToString(),
+                            mobil = Convert.ToInt32(sdr["Teleforn"]),
                             email = sdr["Email"].ToString()
                         });
                         //Console.WriteLine("New Customer Add From DB");
@@ -100,6 +100,7 @@ namespace CLVape.Repository
                 SqlConn.cmd.Parameters.Add("@Email", SqlDbType.VarChar).Value = string.IsNullOrEmpty(email) ? (object)DBNull.Value : email;
                 SqlConn.cmd.Parameters.Add("@Teleforn", SqlDbType.Int).Value = Equals(mobil, 0) ? (object)DBNull.Value : mobil;
                 SqlConn.cmd.Parameters.Add("@FirmaID", SqlDbType.Int).Value = Equals(ID, 0) ? (object)DBNull.Value : ID;
+                SqlConn.cmd.ExecuteNonQuery();
 
                 SqlConn.cmd.Parameters.Clear();
                 SqlConn.closeConnection();

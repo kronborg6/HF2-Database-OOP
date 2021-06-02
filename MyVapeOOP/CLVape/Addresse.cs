@@ -34,7 +34,7 @@ namespace CLVape
             else
             {
                 this.addresseID = AddressID;
-                this.HasChanges = true;
+                //this.HasChanges = true;
             }
         }
         public List<Addresse> getAddresse() // here vil vi tag alle customer fra databasen og load dem ind i det her program

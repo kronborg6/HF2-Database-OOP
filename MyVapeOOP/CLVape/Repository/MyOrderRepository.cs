@@ -27,12 +27,12 @@ namespace CLVape.Repository
                 {
                     while (sdr.Read())
                     {
-                        myOrders.Add(new MyOrder
+                        myOrders.Add(new MyOrder(Convert.ToInt32(sdr["KundeID"]), Convert.ToInt32(sdr["KundeID"]))
                         {
                             //orderID = Convert.ToInt32(sdr["KundeID"]),
                             //kundeID = Convert.ToInt32(sdr["KundeID"]),
-                            AddresseID = Convert.ToInt32(sdr["KundeID"]),
-                            OpretDate = Convert.ToDateTime(sdr["Fornavn"]),
+                            AddresseID = Convert.ToInt32(sdr["AddresseID"]),
+                            OpretDate = Convert.ToDateTime(sdr["OpretDate"])
 
                         });
                         //Console.WriteLine("New Customer Add From DB");
@@ -47,6 +47,65 @@ namespace CLVape.Repository
                 throw;
             }
             return myOrders;
+        }
+        public int AddVareOrderTilDB(int kundeID, int addresseID)
+        {
+            try
+            {
+
+                SqlConn.openConnection();
+
+                SqlConn.sql = "dbo.AddMyOrder";
+                SqlConn.cmd.CommandText = SqlConn.sql;
+                SqlConn.cmd.CommandType = CommandType.StoredProcedure;
+
+
+                SqlConn.cmd.Parameters.Add("@KundeID", SqlDbType.Int).Value = Equals(kundeID, 0) ? (object)DBNull.Value : kundeID;
+                SqlConn.cmd.Parameters.Add("@AddresseID", SqlDbType.Int).Value = Equals(addresseID, 0) ? (object)DBNull.Value : addresseID;
+
+                SqlConn.cmd.Parameters.Add(new SqlParameter("@Lid", SqlDbType.Int));
+                SqlConn.cmd.Parameters["@Lid"].Direction = ParameterDirection.Output;
+                SqlConn.cmd.ExecuteNonQuery();
+
+                int rtnID = (int)SqlConn.cmd.Parameters["@Lid"].Value;
+
+
+                SqlConn.cmd.Parameters.Clear();
+                SqlConn.closeConnection();
+
+
+                return rtnID;
+            }
+            catch (Exception er)
+            {
+                Console.WriteLine("VareRep der er sket en fjel: {0}", er);
+                throw;
+            }
+        }
+        public void UpdateVareOrderDB(int ID, int kundeID, int addresseID)
+        {
+            try
+            {
+                SqlConn.openConnection();
+
+                SqlConn.sql = "dbo.UpdateMyOrder";
+                SqlConn.cmd.CommandText = SqlConn.sql;
+                SqlConn.cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlConn.cmd.Parameters.Add("@MyOrderID", SqlDbType.Int).Value = Equals(ID, 0) ? (object)DBNull.Value : ID;
+                SqlConn.cmd.Parameters.Add("@KundeID", SqlDbType.Int).Value = Equals(kundeID, 0) ? (object)DBNull.Value : kundeID;
+                SqlConn.cmd.Parameters.Add("@AddresseID", SqlDbType.Int).Value = Equals(addresseID, 0) ? (object)DBNull.Value : addresseID;
+                SqlConn.cmd.ExecuteNonQuery();
+
+                SqlConn.cmd.Parameters.Clear();
+                SqlConn.closeConnection();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
         }
     }
 }

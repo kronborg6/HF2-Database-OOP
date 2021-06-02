@@ -104,6 +104,7 @@ namespace CLVape.Repository
                 SqlConn.cmd.Parameters.Add("@Email", SqlDbType.VarChar).Value = string.IsNullOrEmpty(email) ? (object)DBNull.Value : email;
                 SqlConn.cmd.Parameters.Add("@Mobil", SqlDbType.Int).Value = Equals(mobil, 0) ? (object)DBNull.Value : mobil;
                 SqlConn.cmd.Parameters.Add("@KunderID", SqlDbType.Int).Value = Equals(ID, 0) ? (object)DBNull.Value : ID;
+                SqlConn.cmd.ExecuteNonQuery();
 
                 SqlConn.cmd.Parameters.Clear();
                 SqlConn.closeConnection();

@@ -8,3 +8,5 @@ C:\Users\mkron\OneDrive\Dokumenter\Rpoes\GitHub\HF2-Database-OOP\MyVapeOOP\Conso
 C:\Users\mkron\OneDrive\Dokumenter\Rpoes\GitHub\HF2-Database-OOP\MyVapeOOP\ConsoleVapeOOP\bin\Debug\CLVape.dll
 C:\Users\mkron\OneDrive\Dokumenter\Rpoes\GitHub\HF2-Database-OOP\MyVapeOOP\ConsoleVapeOOP\bin\Debug\CLVape.pdb
 C:\Users\mkron\OneDrive\Dokumenter\Rpoes\GitHub\HF2-Database-OOP\MyVapeOOP\ConsoleVapeOOP\obj\Debug\ConsoleVapeOOP.csproj.CopyComplete
+C:\Users\mkron\OneDrive\Dokumenter\Rpoes\GitHub\HF2-Database-OOP\MyVapeOOP\ConsoleVapeOOP\obj\Debug\ConsoleVapeOOP.Properties.Resources.resources
+C:\Users\mkron\OneDrive\Dokumenter\Rpoes\GitHub\HF2-Database-OOP\MyVapeOOP\ConsoleVapeOOP\obj\Debug\ConsoleVapeOOP.csproj.GenerateResource.cache

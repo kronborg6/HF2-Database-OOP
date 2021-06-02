@@ -141,6 +141,7 @@ namespace CLVape.Repository
                 SqlConn.cmd.Parameters.Add("@Antal", SqlDbType.Int).Value = Equals(antal, 0) ? (object)DBNull.Value : antal;
                 SqlConn.cmd.Parameters.Add("@FirmaID", SqlDbType.Int).Value = Equals(firmaID, 0) ? (object)DBNull.Value : firmaID;
                 SqlConn.cmd.Parameters.Add("@VareID", SqlDbType.Int).Value = Equals(ID, 0) ? (object)DBNull.Value : ID;
+                SqlConn.cmd.ExecuteNonQuery();
 
                 SqlConn.cmd.Parameters.Clear();
                 SqlConn.closeConnection();

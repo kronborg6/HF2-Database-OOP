@@ -12,9 +12,17 @@ using System.Windows.Controls;
 
 namespace CLVape
 {
-    public class Vare : EntityBase
+    public class Vare : EntityBase/*, IEquatable<Vare>, IComparable<Vare>*/
     {
-        public int vareID { get; private set; }
+        //public int vareID { get; private set; }
+        private int _vareID;
+
+        public int vareID
+        {
+            get { return _vareID; }
+            set { _vareID = value; }
+        }
+
         public string navn { get; set; }
         public double prise { get; set; }
         public int antal { get; set; }
@@ -69,11 +77,6 @@ namespace CLVape
                 throw;
             }
         }
-
-
-
-
-
 
 
 
@@ -217,26 +220,6 @@ namespace CLVape
             return "ID: " + vareID + " Navn: " + navn + " Prise: " + prise + " Antal: " + antal + "\n";
         }
 
-        public void testAddVare()
-        {
-            VareRepository vareRepository = new VareRepository();
-
-            try
-            {
-                string navn = "AA";
-                float price = 2021;
-                int antal = 15;
-                int firmaID = 1;
-
-                vareRepository.AddVareTilDB(navn, price, antal, firmaID);
-                Console.WriteLine("Vare er blevet kørt");
-            }
-            catch (Exception er)
-            {
-                Console.WriteLine("Vare der er sket en fejl: {0}", er);
-                throw;
-            }
-        }
         public override bool Validate()
         {
             var isValid = true;

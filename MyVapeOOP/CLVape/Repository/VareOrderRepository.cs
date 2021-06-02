@@ -27,14 +27,14 @@ namespace CLVape.Repository
                 {
                     while (sdr.Read())
                     {
-                        vareOrders.Add(new VareOrder(VareOrderID: Convert.ToInt32(sdr["KundeID"]), OrderID: Convert.ToInt32(sdr["KundeID"]), VareID: Convert.ToInt32(sdr["KundeID"]))
+                        vareOrders.Add(new VareOrder(Convert.ToInt32(sdr["VareOrderID"]), Convert.ToInt32(sdr["OrderID"]), Convert.ToInt32(sdr["VareID"]))
                         {
                             //vareOrderID = Convert.ToInt32(sdr["KundeID"]),
                             //orderID = Convert.ToInt32(sdr["KundeID"]),
                             //vareID = Convert.ToInt32(sdr["KundeID"]),
-                            antal = Convert.ToInt32(sdr["KundeID"]),
+                            antal = Convert.ToInt32(sdr["Antal"]),
                             prise = Convert.ToDouble(sdr["Prise"]),
-                            sendtDate = Convert.ToDateTime(sdr["Fornavn"])
+                            sendtDate = Convert.ToDateTime(sdr["SendtDate"])
                         });
                     }
                 }
@@ -101,6 +101,7 @@ namespace CLVape.Repository
                 SqlConn.cmd.Parameters.Add("@VareID", SqlDbType.Int).Value = Equals(vareID, 0) ? (object)DBNull.Value : vareID;
                 SqlConn.cmd.Parameters.Add("@Antal", SqlDbType.Int).Value = Equals(antal, 0) ? (object)DBNull.Value : antal;
                 SqlConn.cmd.Parameters.Add("@Prise", SqlDbType.Float).Value = Equals(price, 0) ? (object)DBNull.Value : price;
+                SqlConn.cmd.ExecuteNonQuery();
 
                 SqlConn.cmd.Parameters.Clear();
                 SqlConn.closeConnection();

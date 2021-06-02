@@ -17,9 +17,22 @@ namespace CLVape
         public int kundeID { get; private set; }
         public int AddresseID { get; set; }
         public DateTime OpretDate { get; set; }
-        public MyOrder()
-        {
 
+        public MyOrder(int OrderID, int KundeID)
+        {
+            if (OrderID == 0)
+            {
+                this.orderID = OrderID;
+                this.kundeID = KundeID;
+                this.IsNew = true;
+                this.HasChanges = true;
+            }
+            else
+            {
+                this.orderID = OrderID;
+                this.kundeID = KundeID;
+                //this.HasChanges = true;
+            }
         }
         
         public List<MyOrder> getMyOrder() // here vil vi tag alle customer fra databasen og load dem ind i det her program
@@ -40,10 +53,19 @@ namespace CLVape
 
             return myOrders;
         }
+        public override string ToString()
+        {
+            return "ID: " + orderID + " Navn: " + kundeID + " Prise: " + AddresseID + "\n";
+        }
 
         public override bool Validate()
         {
-            throw new NotImplementedException();
+            var isValid = true;
+
+            if (AddresseID <= 0) isValid = false;
+            if (kundeID <= 0) isValid = false;
+
+            return isValid;
         }
         public bool Save(MyOrder myOrder)
         {
@@ -55,11 +77,9 @@ namespace CLVape
                 {
                     if (myOrder.IsNew)
                     {
-                        //VareRepository vareRepository = new VareRepository();
-
                         MyOrderRepository myOrderRepository = new MyOrderRepository();
 
-                        //vare.vareID = vareRepository.AddVareTilDB(vare.navn, vare.prise, vare.antal, vare.firmaID);
+                        myOrder.orderID = myOrderRepository.AddVareOrderTilDB(myOrder.kundeID, myOrder.AddresseID);
 
                         myOrder.IsNew = false;
                         myOrder.HasChanges = false;
@@ -68,7 +88,7 @@ namespace CLVape
                     {
                         MyOrderRepository myOrderRepository = new MyOrderRepository();
 
-                        //vareRepository.UpdateVareDB(vare.vareID, vare.navn, vare.prise, vare.antal, vare.firmaID);
+                        myOrderRepository.UpdateVareOrderDB(myOrder.orderID, myOrder.kundeID, myOrder.AddresseID);
 
                         myOrder.HasChanges = false;
                     }

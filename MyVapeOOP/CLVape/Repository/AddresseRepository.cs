@@ -27,7 +27,7 @@ namespace CLVape.Repository
                 {
                     while (sdr.Read())
                     {
-                        addresses.Add(new Addresse(AddressID: Convert.ToInt32(sdr["VareID"]))
+                        addresses.Add(new Addresse(Convert.ToInt32(sdr["AddresseID"]))
                         {
                             //addresseID = Convert.ToInt32(sdr["VareID"]),
                             postnummer = Convert.ToInt32(sdr["Postnummer"]),
@@ -94,6 +94,7 @@ namespace CLVape.Repository
                 SqlConn.cmd.Parameters.Add("@Postnummer", SqlDbType.Int).Value = Equals(postnummer, 0) ? (object)DBNull.Value : postnummer;
                 SqlConn.cmd.Parameters.Add("@KundeID", SqlDbType.Int).Value = Equals(kundeID, 0) ? (object)DBNull.Value : kundeID;
                 SqlConn.cmd.Parameters.Add("@AddresseID", SqlDbType.Int).Value = Equals(ID, 0) ? (object)DBNull.Value : ID;
+                SqlConn.cmd.ExecuteNonQuery();
 
                 SqlConn.cmd.Parameters.Clear();
                 SqlConn.closeConnection();
